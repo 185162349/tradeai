@@ -1,4 +1,4 @@
-# TradeStack — AI tools directory for contractors & trades
+# TradeStack — AI tools directory for contractors & trades1
 
 A static, data-driven directory of AI tools for contractors and trade businesses, organised by
 **occupation × job** rather than by tool category. Built to be regenerated from JSON: adding a tool,

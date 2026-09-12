@@ -1,0 +1,48 @@
+# TradeStack
+
+> A curated directory of AI tools for contractors, plumbers, electricians, HVAC and other trade businesses — organised by the job each tool actually does.
+
+## Jobs
+
+- [Quoting & estimating](https://tradestack.example.com/quoting/): Producing estimates and bids faster — measuring, takeoffs, material pricing and proposal writing.
+- [Scheduling & dispatch](https://tradestack.example.com/scheduling/): Booking jobs, routing crews, managing calendars and reducing no-shows.
+- [Invoicing & payments](https://tradestack.example.com/invoicing/): Turning completed work into invoices, chasing payment and reconciling the books.
+- [Customer communication](https://tradestack.example.com/customer-communication/): Answering enquiries, following up on quotes, sending updates and handling calls you miss.
+- [Job documentation](https://tradestack.example.com/job-documentation/): Site photos, daily reports, progress tracking and proof of work for clients and compliance.
+- [Marketing & reviews](https://tradestack.example.com/marketing/): Getting found locally, collecting reviews, and producing content without a marketing team.
+- [Bookkeeping & admin](https://tradestack.example.com/bookkeeping/): Categorising expenses, capturing receipts and keeping the accounts current.
+
+## Tools
+
+- [Joist](https://tradestack.example.com/tools/joist/): Estimates, invoices and payment collection built for contractors.
+- [Togal.AI](https://tradestack.example.com/tools/togal-ai/): AI takeoff that measures drawings automatically.
+- [Knowify](https://tradestack.example.com/tools/knowify/): Job costing and project management for trade contractors.
+- [Contractor Foreman](https://tradestack.example.com/tools/contractor-foreman/): All-in-one construction management at a lower price point.
+- [Housecall Pro](https://tradestack.example.com/tools/housecall-pro/): Scheduling, dispatch, invoicing and payments for home service businesses.
+- [Jobber](https://tradestack.example.com/tools/jobber/): Field service management for small home service teams.
+- [ServiceTitan](https://tradestack.example.com/tools/servicetitan/): Enterprise field service platform for larger trade businesses.
+- [Workiz](https://tradestack.example.com/tools/workiz/): Field service software with a strong phone and communication layer.
+- [FieldEdge](https://tradestack.example.com/tools/fieldedge/): Field service management aimed at HVAC, plumbing and electrical contractors.
+- [QuickBooks](https://tradestack.example.com/tools/quickbooks/): Accounting software most trade businesses end up on.
+- [FreshBooks](https://tradestack.example.com/tools/freshbooks/): Simple invoicing and accounting for very small businesses.
+- [Xero](https://tradestack.example.com/tools/xero/): Cloud accounting with a large add-on marketplace.
+- [Podium](https://tradestack.example.com/tools/podium/): Customer messaging, reviews and payments in one inbox.
+- [Smith.ai](https://tradestack.example.com/tools/smith-ai/): AI receptionist with human backup for missed calls.
+- [Structurely](https://tradestack.example.com/tools/structurely/): AI assistant that follows up leads by text and email.
+- [Tidio](https://tradestack.example.com/tools/tidio/): Website chat with AI answers to common questions.
+- [CompanyCam](https://tradestack.example.com/tools/companycam/): Job site photo documentation with automatic organisation.
+- [Raken](https://tradestack.example.com/tools/raken/): Daily reports and field documentation from a phone.
+- [OpenSpace](https://tradestack.example.com/tools/openspace/): Automatic 360° capture of job site progress.
+- [Autodesk Construction Cloud](https://tradestack.example.com/tools/autodesk-construction-cloud/): Document and project control for construction projects.
+- [Birdeye](https://tradestack.example.com/tools/birdeye/): Review collection and local listings management.
+- [Canva Magic Studio](https://tradestack.example.com/tools/canva-magic-studio/): Design tool with AI image and text generation.
+- [Jasper](https://tradestack.example.com/tools/jasper/): AI writing assistant for marketing copy.
+- [Semrush](https://tradestack.example.com/tools/semrush/): SEO and competitive research toolkit.
+- [Dext](https://tradestack.example.com/tools/dext/): Receipt and invoice capture that feeds your accounts.
+- [Expensify](https://tradestack.example.com/tools/expensify/): Expense reporting with automatic receipt scanning.
+- [ChatGPT](https://tradestack.example.com/tools/chatgpt/): General AI assistant for writing, analysis and problem solving.
+- [Claude](https://tradestack.example.com/tools/claude/): AI assistant that is strong with long documents.
+- [Otter.ai](https://tradestack.example.com/tools/otter-ai/): Meeting and call transcription with summaries.
+- [Grammarly](https://tradestack.example.com/tools/grammarly/): Writing assistant for quotes, emails and proposals.
+- [Motion](https://tradestack.example.com/tools/motion/): AI calendar that schedules your work for you.
+- [Loom](https://tradestack.example.com/tools/loom/): Record short videos to explain work to customers.

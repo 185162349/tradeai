@@ -1,0 +1,83 @@
+{
+  "tasks": [
+    {
+      "slug": "quoting",
+      "name": "Quoting & estimating",
+      "desc": "Producing estimates and bids faster — measuring, takeoffs, material pricing and proposal writing.",
+      "pain": "Estimating is where trades lose the most unpaid hours, and a slow quote usually means a lost job."
+    },
+    {
+      "slug": "scheduling",
+      "name": "Scheduling & dispatch",
+      "desc": "Booking jobs, routing crews, managing calendars and reducing no-shows.",
+      "pain": "Double bookings and wasted drive time are the two most expensive scheduling mistakes."
+    },
+    {
+      "slug": "invoicing",
+      "name": "Invoicing & payments",
+      "desc": "Turning completed work into invoices, chasing payment and reconciling the books.",
+      "pain": "Getting paid weeks after the work is done is a cash-flow problem, not an admin problem."
+    },
+    {
+      "slug": "customer-communication",
+      "name": "Customer communication",
+      "desc": "Answering enquiries, following up on quotes, sending updates and handling calls you miss.",
+      "pain": "Missed calls are missed jobs — most customers call the next company on the list."
+    },
+    {
+      "slug": "job-documentation",
+      "name": "Job documentation",
+      "desc": "Site photos, daily reports, progress tracking and proof of work for clients and compliance.",
+      "pain": "Without photo records, disputes over what was done become your word against theirs."
+    },
+    {
+      "slug": "marketing",
+      "name": "Marketing & reviews",
+      "desc": "Getting found locally, collecting reviews, and producing content without a marketing team.",
+      "pain": "Most trade businesses get the majority of new work from local search and word of mouth."
+    },
+    {
+      "slug": "bookkeeping",
+      "name": "Bookkeeping & admin",
+      "desc": "Categorising expenses, capturing receipts and keeping the accounts current.",
+      "pain": "A shoebox of receipts in April costs more in accountant fees than the software would have."
+    }
+  ],
+  "trades": [
+    {
+      "slug": "plumbers",
+      "name": "Plumbers",
+      "context": "Plumbing work is mostly reactive — emergency callouts, narrow arrival windows and customers who want a price before you have seen the job. Speed of quoting and answering the phone tends to decide who wins the work."
+    },
+    {
+      "slug": "electricians",
+      "name": "Electricians",
+      "context": "Electrical work carries certification and documentation duties that most other trades do not, so paperwork is genuinely part of the job rather than an optional extra. Records of what was installed and tested matter long after the invoice is paid."
+    },
+    {
+      "slug": "hvac",
+      "name": "HVAC",
+      "context": "HVAC businesses live and die by seasonality — a heatwave fills the schedule in a day, and maintenance contracts are what smooth the rest of the year. Dispatch efficiency and timely service reminders have a direct effect on revenue."
+    },
+    {
+      "slug": "roofers",
+      "name": "Roofers",
+      "context": "Roofing jobs are high value, weather dependent and frequently disputed, which makes photo documentation and written scope unusually important. Much of the work is also sold through inspections and insurance claims, so records carry real weight."
+    },
+    {
+      "slug": "landscapers",
+      "name": "Landscapers",
+      "context": "Landscaping runs on repeat visits and route density — the same properties, week after week. Scheduling and routing matter more than almost anything else, and most customers are happy to pay by card on the day."
+    },
+    {
+      "slug": "remodelers",
+      "name": "Remodelers & carpenters",
+      "context": "Remodelling jobs run for weeks, involve change orders and tie up cash in materials before the customer pays. Job costing and progress billing are the difference between a profitable project and one that quietly loses money."
+    },
+    {
+      "slug": "general-contractors",
+      "name": "General contractors",
+      "context": "General contractors coordinate other trades, which means documentation, scheduling and compliance are constant rather than occasional. On larger projects the paper trail is often contractually required, not merely useful."
+    }
+  ]
+}

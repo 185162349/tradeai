@@ -1,9 +1,9 @@
 {
   "siteName": "TradeStack",
-  "domain": "https://tradestack.example.com",
+  "domain": "https://stackfortrades.com",
   "tagline": "AI tools for contractors and trades",
   "description": "A curated directory of AI tools for contractors, plumbers, electricians, HVAC and other trade businesses — organised by the job each tool actually does.",
   "contactEmail": "hi@example.com",
   "niche": "contractors and trades",
-  "lastUpdated": "2026-09-11"
+  "lastUpdated": "2026-09-12"
 }

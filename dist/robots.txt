@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tradestack.example.com/sitemap.xml
+Sitemap: https://stackfortrades.com/sitemap.xml

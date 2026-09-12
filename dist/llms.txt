@@ -46,3 +46,10 @@
 - [Grammarly](https://stackfortrades.com/tools/grammarly/): Writing assistant for quotes, emails and proposals.
 - [Motion](https://stackfortrades.com/tools/motion/): AI calendar that schedules your work for you.
 - [Loom](https://stackfortrades.com/tools/loom/): Record short videos to explain work to customers.
+
+## Other pages
+
+- [About](https://stackfortrades.com/about/): Who we are, how we choose AI tools for contractors and trades, and what we will not do.
+- [Privacy Policy](https://stackfortrades.com/privacy/): How this site handles visitor data, cookies and advertising.
+- [Terms of Use](https://stackfortrades.com/terms/): Terms and conditions for using this directory.
+- [Contact](https://stackfortrades.com/contact/): Get in touch about corrections, additions or questions.

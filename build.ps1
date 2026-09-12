@@ -55,13 +55,14 @@ function Get-Hostname($url) {
   } catch { return $url }
 }
 
-function Build-Page($contentHtml, $title, $description, $canonical, $jsonld) {
+function Build-Page($contentHtml, $title, $description, $canonical, $jsonld, $breadcrumb) {
   $layout = Get-Content (Join-Path $src 'templates\layout.html') -Raw -Encoding UTF8
   $tokens = @{
     'TITLE'       = Esc $title
     'DESCRIPTION' = Esc $description
     'CANONICAL'   = $canonical
     'JSONLD'      = $jsonld
+    'BREADCRUMB'  = $breadcrumb
     'CONTENT'     = $contentHtml
     'SITE_NAME'   = Esc $script:cfg.siteName
     'DOMAIN'      = $script:cfg.domain
@@ -74,6 +75,27 @@ function Build-Page($contentHtml, $title, $description, $canonical, $jsonld) {
 
 function Jsonld($objectText) {
   return "<script type=`"application/ld+json`">`n" + $objectText + "`n</script>"
+}
+
+# builds a BreadcrumbList from an array of @{ name = ...; url = ... }
+# url is relative to the site root, e.g. '/quoting/plumbers/'
+function Breadcrumb-Jsonld($items) {
+  $parts = @()
+  $pos = 1
+  foreach ($it in @($items)) {
+    $entry = '{"@type":"ListItem","position":' + $pos + ',"name":"' + (JsStr $it.name) + '"'
+    if ($it.url) { $entry += ',"item":"' + $script:cfg.domain + $it.url + '"' }
+    $entry += '}'
+    $parts += $entry
+    $pos++
+  }
+  return Jsonld ('{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    ' + ($parts -join ",`n    ") + '
+  ]
+}')
 }
 
 # ----------------------------------------------------------------- load data
@@ -189,7 +211,7 @@ $homeJsonld = Jsonld ('{
   "description": "' + $cfg.description + '"
 }')
 
-$html = Build-Page $homeContent ('AI tools for ' + $cfg.niche) $cfg.description ($cfg.domain + '/') $homeJsonld
+$html = Build-Page $homeContent ('AI tools for ' + $cfg.niche) $cfg.description ($cfg.domain + '/') $homeJsonld ''
 Write-Page 'index.html' $html
 [void]$urls.Add($cfg.domain + '/')
 
@@ -233,7 +255,11 @@ foreach ($t in $tasks) {
   "description": "' + $desc + '"
 }')
 
-  $html = Build-Page $content $title $desc $canonical $jsonld
+  $bc = Breadcrumb-Jsonld @(
+    @{ name = 'Home'; url = '/' },
+    @{ name = $t.name; url = '/' + $t.slug + '/' }
+  )
+  $html = Build-Page $content $title $desc $canonical $jsonld $bc
   Write-Page ($t.slug + '/index.html') $html
   [void]$urls.Add($canonical)
 }
@@ -317,7 +343,12 @@ foreach ($tool in $tools) {
   "description": "' + $desc + '"
 }')
 
-  $html = Build-Page $content $title $desc $canonical $jsonld
+  $bc = Breadcrumb-Jsonld @(
+    @{ name = 'Home'; url = '/' },
+    @{ name = $primaryName; url = '/' + $primaryTask + '/' },
+    @{ name = $tool.name; url = '/tools/' + $tool.slug + '/' }
+  )
+  $html = Build-Page $content $title $desc $canonical $jsonld $bc
   Write-Page ('tools/' + $tool.slug + '/index.html') $html
   [void]$urls.Add($canonical)
 }
@@ -379,7 +410,11 @@ foreach ($tr in $trades) {
   "description": "' + $desc + '"
 }')
 
-  $html = Build-Page $content $title $desc $canonical $jsonld
+  $bc = Breadcrumb-Jsonld @(
+    @{ name = 'Home'; url = '/' },
+    @{ name = $tr.name; url = '/' + $tr.slug + '/' }
+  )
+  $html = Build-Page $content $title $desc $canonical $jsonld $bc
   Write-Page ($tr.slug + '/index.html') $html
   [void]$urls.Add($canonical)
 }
@@ -511,7 +546,12 @@ foreach ($t in $tasks) {
 }')
     $jsonld = $pageJsonld + "`n" + $faqJsonld
 
-    $html = Build-Page $content $title $comboDesc $canonical $jsonld
+    $bc = Breadcrumb-Jsonld @(
+      @{ name = 'Home'; url = '/' },
+      @{ name = $tr.name; url = '/' + $tr.slug + '/' },
+      @{ name = $t.name; url = '/' + $t.slug + '/' + $tr.slug + '/' }
+    )
+    $html = Build-Page $content $title $comboDesc $canonical $jsonld $bc
     Write-Page ($t.slug + '/' + $tr.slug + '/index.html') $html
     [void]$urls.Add($canonical)
   }
@@ -523,7 +563,11 @@ foreach ($p in @($pagesJson.pages)) {
   $body = $p.body -replace '\{\{CONTACT_EMAIL\}\}', $cfg.contactEmail
   $content = Apply $tplPage @{ 'H1' = Esc $p.title; 'BODY' = $body }
   $canonical = $cfg.domain + '/' + $p.slug + '/'
-  $html = Build-Page $content ($p.title + ' - ' + $cfg.siteName) $p.description $canonical ''
+  $bc = Breadcrumb-Jsonld @(
+    @{ name = 'Home'; url = '/' },
+    @{ name = $p.title; url = '/' + $p.slug + '/' }
+  )
+  $html = Build-Page $content ($p.title + ' - ' + $cfg.siteName) $p.description $canonical '' $bc
   Write-Page ($p.slug + '/index.html') $html
   [void]$urls.Add($canonical)
 }
@@ -532,13 +576,54 @@ foreach ($p in @($pagesJson.pages)) {
 
 $sitemap = '<?xml version="1.0" encoding="UTF-8"?>' + "`n" +
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "`n"
+$lastmod = if ($cfg.lastUpdated) { [string]$cfg.lastUpdated } else { (Get-Date).ToString('yyyy-MM-dd') }
 foreach ($u in $urls) {
-  $sitemap += '  <url><loc>' + $u + '</loc></url>' + "`n"
+  $sitemap += '  <url><loc>' + $u + '</loc><lastmod>' + $lastmod + '</lastmod></url>' + "`n"
 }
 $sitemap += '</urlset>'
 Write-Page 'sitemap.xml' $sitemap
 
-$robots = "User-agent: *`nAllow: /`n`nSitemap: " + $cfg.domain + "/sitemap.xml"
+$robots = @"
+User-agent: *
+Allow: /
+Disallow: /404.html
+
+# --- AI / LLM crawlers (explicit allow) ---
+# Training crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Real-time retrieval / reference bots
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Common Crawl (training corpus for many LLMs)
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+Sitemap: $($cfg.domain)/sitemap.xml
+"@
 Write-Page 'robots.txt' $robots
 
 $llms = New-Object System.Text.StringBuilder
@@ -556,6 +641,13 @@ foreach ($t in $tasks) {
 [void]$llms.AppendLine('')
 foreach ($tool in $tools) {
   [void]$llms.AppendLine('- [' + $tool.name + '](' + $cfg.domain + '/tools/' + $tool.slug + '/): ' + $tool.tagline)
+}
+[void]$llms.AppendLine('')
+[void]$llms.AppendLine('## Other pages')
+[void]$llms.AppendLine('')
+foreach ($p in @($pagesJson.pages)) {
+  $pd = if ($p.description) { [string]$p.description } else { [string]$p.title }
+  [void]$llms.AppendLine('- [' + $p.title + '](' + $cfg.domain + '/' + $p.slug + '/): ' + $pd)
 }
 Write-Page 'llms.txt' $llms.ToString()
 
@@ -577,7 +669,7 @@ if (Test-Path $staticDir) {
 $notFoundContent = '<main class="page"><div class="wrap"><h1>Page not found</h1>' +
                    '<p>The page you were looking for does not exist. Start from the ' +
                    '<a href="/">directory home</a>.</p></div></main>'
-$notFound = Build-Page $notFoundContent 'Page not found' 'The page you were looking for does not exist.' ($cfg.domain + '/404.html') ''
+$notFound = Build-Page $notFoundContent 'Page not found' 'The page you were looking for does not exist.' ($cfg.domain + '/404.html') '' ''
 Write-Page '404.html' $notFound
 
 Write-Host ('Done. Pages: ' + $urls.Count + '  ->  ' + $dist) -ForegroundColor Green

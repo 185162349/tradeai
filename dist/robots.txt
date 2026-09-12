@@ -1,4 +1,39 @@
 User-agent: *
 Allow: /
+Disallow: /404.html
+
+# --- AI / LLM crawlers (explicit allow) ---
+# Training crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Real-time retrieval / reference bots
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Common Crawl (training corpus for many LLMs)
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
 
 Sitemap: https://stackfortrades.com/sitemap.xml

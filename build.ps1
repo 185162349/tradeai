@@ -141,12 +141,18 @@ foreach ($tr in $trades) {
 $toolItems = @()
 foreach ($tool in $tools) {
   $tagParts = @()
+  $taskTags = 0
   foreach ($ts in @($tool.tasks)) {
+    if ($taskTags -ge 2) { break }
     if ($taskBySlug.ContainsKey($ts)) {
       $tagParts += '<span class="tag">' + (Esc $taskBySlug[$ts].name) + '</span>'
+      $taskTags++
     }
   }
   if ($tool.free -match 'Free tier') { $tagParts += '<span class="tag free">Free tier</span>' }
+  if ($tool.pricing -notmatch '^\s*Free') {
+    $tagParts += '<span class="tag price">' + (Esc $tool.pricing) + '</span>'
+  }
   $toolItems += '<li><h3><a href="/tools/' + $tool.slug + '/">' + (Esc $tool.name) + '</a></h3>' +
                 '<p>' + (Esc $tool.tagline) + '</p>' +
                 '<div class="tags">' + ($tagParts -join '') + '</div></li>'
@@ -156,6 +162,8 @@ $homeContent = Apply $tplHome @{
   'H1'         = Esc ('AI tools for ' + $cfg.niche)
   'LEAD'       = Esc $cfg.description
   'TOOL_COUNT' = $tools.Count
+  'TASK_COUNT' = $tasks.Count
+  'TRADE_COUNT' = $trades.Count
   'UPDATED'    = Esc $cfg.lastUpdated
   'TASK_CARDS' = ($taskCards -join "`n      ")
   'TRADE_CARDS' = ($tradeCards -join "`n      ")

@@ -47,37 +47,128 @@
     {
       "slug": "plumbers",
       "name": "Plumbers",
-      "context": "Plumbing work is mostly reactive — emergency callouts, narrow arrival windows and customers who want a price before you have seen the job. Speed of quoting and answering the phone tends to decide who wins the work."
+      "context": "Plumbing work is mostly reactive — emergency callouts, narrow arrival windows and customers who want a price before you have seen the job. Speed of quoting and answering the phone tends to decide who wins the work.",
+      "faq": {
+        "q": "Can I quote a plumbing job from a photo?",
+        "a": "Enough to give a range, not a fixed price. Most plumbers use photos to qualify the job and decide whether the visit is chargeable, then confirm the number on site before any work starts."
+      },
+      "pains": {
+        "quoting": "Plumbing quotes are usually written on the doorstep with the customer waiting. A quote that takes two days to arrive loses to the company that priced it on the spot, so speed matters more than precision.",
+        "scheduling": "Emergency callouts arrive without warning and have to be squeezed into a day that was already full. Without a live schedule, the office double-books the only technician qualified for the work.",
+        "invoicing": "Domestic plumbing is often settled on site, and card payment on the day is the norm. Chasing payment later is awkward when the customer already considers the job finished.",
+        "customer-communication": "Plumbing enquiries are urgent and go to whoever answers first. A missed call while you are under a sink is usually a job that goes to the next name on the list.",
+        "job-documentation": "Before-and-after photos of hidden pipework are the only proof of what was done once walls are closed up. Without them, a later leak becomes an argument about whether the work happened at all.",
+        "marketing": "Plumbers depend on local search for emergency work, and reviews that mention response time carry more weight than any advert. Asking while you are still on site is what actually produces them.",
+        "bookkeeping": "Van stock, parts bought on the way to a job and subcontractor splits make plumbing expenses messy. Receipts that never get photographed are the main reason the accounts run months behind."
+      }
     },
     {
       "slug": "electricians",
       "name": "Electricians",
-      "context": "Electrical work carries certification and documentation duties that most other trades do not, so paperwork is genuinely part of the job rather than an optional extra. Records of what was installed and tested matter long after the invoice is paid."
+      "context": "Electrical work carries certification and documentation duties that most other trades do not, so paperwork is genuinely part of the job rather than an optional extra. Records of what was installed and tested matter long after the invoice is paid.",
+      "faq": {
+        "q": "Do I need software that stores electrical certificates?",
+        "a": "Any system that lets you attach test results and certificates to a job and find them again later is enough. Dedicated certification apps only start to matter when you are issuing a large number of certificates every month."
+      },
+      "pains": {
+        "quoting": "Electrical estimating has to account for circuit counts, cable runs and certification work, which is hard to price from memory. Under-quoting a rewire is one of the most expensive mistakes in the trade.",
+        "scheduling": "Electrical work is dictated by the other trades on site — first fix cannot happen before the plasterer, second fix cannot happen after them. Schedules slip for reasons outside your control.",
+        "invoicing": "Part-completed electrical work is usually billed in stages against certification milestones. Without staged invoicing, cash sits tied up until final sign-off, which can be weeks away.",
+        "customer-communication": "Customers want to know when the power will be off and when the certificate will arrive. Answering those two questions quickly removes most of the calls that interrupt a working day.",
+        "job-documentation": "Test results, circuit schedules and installation certificates are legally required, not optional paperwork. Losing them means re-testing at your own cost, so they need to live somewhere searchable.",
+        "marketing": "Electrical work is trust-driven — customers look for licence numbers and evidence of certification before they call. Reviews that mention safety and tidiness convert better than discounts.",
+        "bookkeeping": "Electrical businesses carry high-value stock and certification costs that have to be tracked per job. Mixing materials bought for one job into another is what makes job margins impossible to read."
+      }
     },
     {
       "slug": "hvac",
       "name": "HVAC",
-      "context": "HVAC businesses live and die by seasonality — a heatwave fills the schedule in a day, and maintenance contracts are what smooth the rest of the year. Dispatch efficiency and timely service reminders have a direct effect on revenue."
+      "context": "HVAC businesses live and die by seasonality — a heatwave fills the schedule in a day, and maintenance contracts are what smooth the rest of the year. Dispatch efficiency and timely service reminders have a direct effect on revenue.",
+      "faq": {
+        "q": "Should maintenance contracts be billed monthly or annually?",
+        "a": "Monthly billing is standard because it smooths seasonality and keeps the customer on the books. Annual billing is simpler to administer but leaves you without contact between visits."
+      },
+      "pains": {
+        "quoting": "HVAC quotes are often given on site with the customer deciding the same day, especially during a heatwave. Load calculations and equipment options make it easy to under-price the install.",
+        "scheduling": "Seasonality breaks HVAC schedules — a cold snap fills the diary in a morning and maintenance visits get pushed out. Dispatching the nearest qualified technician is what keeps the day profitable.",
+        "invoicing": "Service agreements, warranty work and retrofit installs each bill differently. Mixing them into one process is the usual reason HVAC receivables run late.",
+        "customer-communication": "Maintenance reminders and filter-change prompts are a revenue channel, not just admin. Customers who hear from you before the season turns rarely call a competitor first.",
+        "job-documentation": "Photographing serial numbers, refrigerant lines and pre-existing damage protects you when a system fails weeks later, and it speeds up warranty claims with manufacturers.",
+        "marketing": "HVAC demand is weather-driven, so being visible before the season turns matters more than steady year-round spending. Reviews naming the technician and the response time drive the most calls.",
+        "bookkeeping": "Warranty claims, service contracts and parts under warranty create three different money trails. Reconciling them monthly is the only way to know whether maintenance contracts actually pay."
+      }
     },
     {
       "slug": "roofers",
       "name": "Roofers",
-      "context": "Roofing jobs are high value, weather dependent and frequently disputed, which makes photo documentation and written scope unusually important. Much of the work is also sold through inspections and insurance claims, so records carry real weight."
+      "context": "Roofing jobs are high value, weather dependent and frequently disputed, which makes photo documentation and written scope unusually important. Much of the work is also sold through inspections and insurance claims, so records carry real weight.",
+      "faq": {
+        "q": "How do I price weather risk into a roofing quote?",
+        "a": "Most roofers price the job normally and manage weather through scheduling, with a clause covering delays. Adding a large contingency to the number usually just loses the job."
+      },
+      "pains": {
+        "quoting": "Roofing estimates depend on pitch, access, material choice and weather risk, all of which move the number. A fast estimate that misses access costs turns a good margin into a loss.",
+        "scheduling": "Roofing is weather dependent, so a week of rain pushes every job back at once. Rescheduling crews and keeping customers informed becomes a bigger job than the scheduling itself.",
+        "invoicing": "Roofing invoices are large, sometimes insurance-backed, and often paid in stages against inspection. Deposits and progress billing protect cash when materials are bought up front.",
+        "customer-communication": "Roof work is disruptive and highly visible, so customers want progress updates and a clear explanation of what was found. Most complaints start with silence, not with the work.",
+        "job-documentation": "Photos of decking, underlayment and finished work are what settle insurance and dispute claims. A roofing job without a photo record is a liability waiting to be argued about.",
+        "marketing": "Storm damage drives most roofing leads, and the first company to inspect usually wins. Reviews carrying photos of completed roofs do more than any paid listing.",
+        "bookkeeping": "Materials are bought per job, often on account, and billed weeks later. Matching supplier invoices to jobs is the difference between knowing and guessing your margins."
+      }
     },
     {
       "slug": "landscapers",
       "name": "Landscapers",
-      "context": "Landscaping runs on repeat visits and route density — the same properties, week after week. Scheduling and routing matter more than almost anything else, and most customers are happy to pay by card on the day."
+      "context": "Landscaping runs on repeat visits and route density — the same properties, week after week. Scheduling and routing matter more than almost anything else, and most customers are happy to pay by card on the day.",
+      "faq": {
+        "q": "Is per-visit or monthly billing better for landscaping?",
+        "a": "Monthly billing suits recurring maintenance because it matches how customers budget. Per-visit works better for one-off cleanups and seasonal work where the scope changes each time."
+      },
+      "pains": {
+        "quoting": "Landscaping quotes are site-specific and seasonal, and customers often compare three of them. Quoting from a standard price list without a site visit produces numbers you cannot defend.",
+        "scheduling": "Route density decides profit in landscaping — two properties on the same street are worth more than one twice as far away. Crews routed badly lose an hour a day to driving.",
+        "invoicing": "Most landscaping is billed per visit or monthly on a recurring basis. Manually invoicing repeat customers is the single biggest source of late payment in the trade.",
+        "customer-communication": "Customers want to know which day the crew is coming and whether weather will move it. A text the day before removes most of the calls and most of the complaints.",
+        "job-documentation": "Photos of completed work protect you when a customer claims a plant was never installed or a bed never edged. They also sell the next job better than any written description.",
+        "marketing": "Before-and-after photos are the most effective marketing a landscaping business has. Reviews that include them consistently outperform paid ads in local search.",
+        "bookkeeping": "Fuel, seasonal labour and plant material make landscaping costs lumpy through the year. Categorising spend by job type is what makes off-season pricing decisions possible."
+      }
     },
     {
       "slug": "remodelers",
       "name": "Remodelers & carpenters",
-      "context": "Remodelling jobs run for weeks, involve change orders and tie up cash in materials before the customer pays. Job costing and progress billing are the difference between a profitable project and one that quietly loses money."
+      "context": "Remodelling jobs run for weeks, involve change orders and tie up cash in materials before the customer pays. Job costing and progress billing are the difference between a profitable project and one that quietly loses money.",
+      "faq": {
+        "q": "How do I stop change orders eating the margin?",
+        "a": "Price every change as a separate written order with its own cost and time impact before the work proceeds. Verbal changes agreed on site are where remodelling profit disappears."
+      },
+      "pains": {
+        "quoting": "Remodelling quotes carry change orders, allowances and selections that move after work starts. A quote written without allowances gets renegotiated, usually in the customer's favour.",
+        "scheduling": "Remodelling schedules depend on trades arriving in the right order. One delayed inspection or back-ordered item pushes the whole project and every job booked after it.",
+        "invoicing": "Progress billing against milestones is standard in remodelling, and deposits fund materials. Invoicing only at the end means financing the customer's project yourself.",
+        "customer-communication": "Long projects generate constant questions about selections, timing and cost. Written updates at each milestone prevent the misunderstandings that turn into disputes.",
+        "job-documentation": "Daily progress photos and signed change orders are what protect a remodeller when scope is questioned. Most remodelling disputes come down to what was agreed and when.",
+        "marketing": "Project galleries sell remodelling work better than any advert, especially with room-by-room photos. Reviews describing how the job was managed matter more than price.",
+        "bookkeeping": "Job costing is the whole business in remodelling — labour, materials and subs per project. Without it you cannot tell which type of job is actually making money."
+      }
     },
     {
       "slug": "general-contractors",
       "name": "General contractors",
-      "context": "General contractors coordinate other trades, which means documentation, scheduling and compliance are constant rather than occasional. On larger projects the paper trail is often contractually required, not merely useful."
+      "context": "General contractors coordinate other trades, which means documentation, scheduling and compliance are constant rather than occasional. On larger projects the paper trail is often contractually required, not merely useful.",
+      "faq": {
+        "q": "How many projects can a small GC manage without software?",
+        "a": "Two or three concurrent projects are manageable with spreadsheets. Beyond that, subcontractor schedules, RFIs and progress claims start needing a system with one shared record."
+      },
+      "pains": {
+        "quoting": "GC bids are assembled from subcontractor quotes, and the submission window is short. Missed scope in a sub's number becomes your problem, so takeoff accuracy matters more than raw speed.",
+        "scheduling": "GCs coordinate everyone else's schedule, so one delayed trade cascades. Keeping a live schedule shared with subs is the difference between a single slip and ten.",
+        "invoicing": "Retention, progress claims and lien waivers make GC invoicing contractual rather than simple. Billing without the right paperwork attached is how payments get held up for weeks.",
+        "customer-communication": "Owners, architects and subs all want updates, and they each want different things. One written weekly update prevents most of the interruptions and most of the disputes.",
+        "job-documentation": "Daily reports, inspection records and RFIs are contractually required on most GC projects. Missing paperwork can hold back a payment application entirely.",
+        "marketing": "GC work is won on reputation and past projects rather than local search. A portfolio with scope, budget range and delivery detail does more than any advert.",
+        "bookkeeping": "Multiple concurrent projects with retention and subcontractor payments make GC bookkeeping complex. Job-level reporting is the only way to see which projects are funding which."
+      }
     }
   ]
 }

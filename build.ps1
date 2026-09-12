@@ -29,6 +29,17 @@ function Esc($s) {
   return [System.Net.WebUtility]::HtmlEncode([string]$s)
 }
 
+# escapes a value for use inside a JSON string literal
+function JsStr($s) {
+  if ($null -eq $s) { return '' }
+  $t = [string]$s
+  $t = $t -replace '\\', '\\'
+  $t = $t -replace '"', '\"'
+  $t = $t -replace "`r`n", ' '
+  $t = $t -replace "`n", ' '
+  return $t.Trim()
+}
+
 function Apply($tpl, $tokens) {
   $out = $tpl
   foreach ($k in $tokens.Keys) {
@@ -385,14 +396,34 @@ foreach ($t in $tasks) {
     }
     if ($matched.Count -lt 2) { continue }
 
+    # unique pain point for this job x trade pair (falls back to the generic job pain)
+    $painText = ''
+    if ($tr.pains) {
+      $painProp = $tr.pains.PSObject.Properties[$t.slug]
+      if ($painProp) { $painText = [string]$painProp.Value }
+    }
+    if (-not $painText) { $painText = [string]$t.pain }
+
     $list = @()
+    $rows = @()
     foreach ($tl in $matched) {
       $tagParts = @()
       if ($tl.free -match 'Free tier') { $tagParts += '<span class="tag free">Free tier</span>' }
       $list += '<li><h3><a href="/tools/' + $tl.slug + '/">' + (Esc $tl.name) + '</a></h3>' +
                '<p>' + (Esc $tl.tagline) + '</p>' +
                '<div class="tags">' + ($tagParts -join '') + '</div></li>'
+
+      $best = [string]$tl.bestFor
+      if ($best.Length -gt 95) { $best = $best.Substring(0, 92).TrimEnd() + '...' }
+      $rows += '<tr><td><a href="/tools/' + $tl.slug + '/">' + (Esc $tl.name) + '</a></td>' +
+               '<td>' + (Esc $best) + '</td>' +
+               '<td>' + (Esc $tl.pricing) + '</td>' +
+               '<td>' + (Esc $tl.free) + '</td></tr>'
     }
+
+    $compareTable = '<div class="table-scroll"><table class="compare">' +
+      '<thead><tr><th>Tool</th><th>Best for</th><th>Pricing</th><th>Free option</th></tr></thead>' +
+      '<tbody>' + ($rows -join "`n      ") + '</tbody></table></div>'
 
     $other = @()
     foreach ($ot in $tasks) {
@@ -403,28 +434,82 @@ foreach ($t in $tasks) {
                 '<span>' + $n + ' tools</span></a></li>'
     }
 
-    $comboDesc = 'Tools that help ' + $tr.name.ToLower() + ' with ' + $t.name.ToLower() + '. ' + $t.desc
+    $tradeLower = ([string]$tr.name).ToLower()
+    if ($tr.slug -eq 'hvac') { $tradeLower = 'HVAC' }   # acronym, do not lowercase
+    $taskLower  = ([string]$t.name).ToLower()
+
+    $comboDesc = 'Tools that help ' + $tradeLower + ' with ' + $taskLower + '. ' + $t.desc
+
+    # ---- FAQ: two answers built from the page data, the unique pain, plus the trade's own question
+    $topText = @()
+    foreach ($tl in @($matched | Select-Object -First 3)) {
+      $bf = ([string]$tl.bestFor) -replace '\.$', ''
+      $topText += $tl.name + ' (' + $bf + ')'
+    }
+    $freeCount = @(@($matched) | Where-Object { $_.free -match 'Free tier' }).Count
+
+    $faq = New-Object System.Collections.ArrayList
+    [void]$faq.Add(@{
+      q = 'Which ' + $taskLower + ' tools work best for ' + $tradeLower + '?'
+      a = 'The three that fit best here are ' + ($topText -join ', ') +
+          '. Start with the one whose description matches your crew size, not the one with the longest feature list.'
+    })
+    [void]$faq.Add(@{
+      q = 'How much does ' + $taskLower + ' software cost for ' + $tradeLower + '?'
+      a = 'Across the ' + $matched.Count + ' tools on this page, ' + $freeCount +
+          ' have a free tier and the rest are paid, most of them billed per user per month. Prices change often, so treat the figures here as indicative and confirm on the vendor site.'
+    })
+    [void]$faq.Add(@{
+      q = 'Why does ' + $taskLower + ' cause problems for ' + $tradeLower + ' specifically?'
+      a = $painText
+    })
+    if ($tr.faq -and $tr.faq.q) {
+      [void]$faq.Add(@{ q = [string]$tr.faq.q; a = [string]$tr.faq.a })
+    }
+
+    $faqHtml = @()
+    $faqSchema = @()
+    $firstFaq = $true
+    foreach ($f in $faq) {
+      $openAttr = if ($firstFaq) { ' open' } else { '' }
+      $faqHtml += '<details class="faq-item"' + $openAttr + '><summary>' + (Esc $f.q) + '</summary>' +
+                  '<p class="faq-a">' + (Esc $f.a) + '</p></details>'
+      $faqSchema += '{"@type":"Question","name":"' + (JsStr $f.q) +
+                    '","acceptedAnswer":{"@type":"Answer","text":"' + (JsStr $f.a) + '"}}'
+      $firstFaq = $false
+    }
 
     $content = Apply $tplCombo @{
-      'TRADE_SLUG'  = $tr.slug
-      'TRADE_NAME'  = Esc $tr.name
-      'TASK_NAME'   = Esc $t.name
-      'H1'          = Esc ($t.name + ' tools for ' + $tr.name)
-      'DESC'        = Esc $comboDesc
-      'CONTEXT'     = Esc $tr.context
-      'TOOL_LIST'   = ($list -join "`n      ")
-      'OTHER_TASKS' = ($other -join "`n      ")
+      'TRADE_SLUG'    = $tr.slug
+      'TRADE_NAME'    = Esc $tr.name
+      'TASK_NAME'     = Esc $t.name
+      'H1'            = Esc ($t.name + ' tools for ' + $tr.name)
+      'DESC'          = Esc $comboDesc
+      'PAIN'          = Esc $painText
+      'CONTEXT'       = Esc $tr.context
+      'COMPARE_TABLE' = $compareTable
+      'TOOL_LIST'     = ($list -join "`n      ")
+      'FAQ_ITEMS'     = ($faqHtml -join "`n      ")
+      'OTHER_TASKS'   = ($other -join "`n      ")
     }
 
     $canonical = $cfg.domain + '/' + $t.slug + '/' + $tr.slug + '/'
     $title = $t.name + ' tools for ' + $tr.name
-    $jsonld = Jsonld ('{
+    $pageJsonld = Jsonld ('{
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "' + $title + '",
   "url": "' + $canonical + '",
   "description": "' + $comboDesc + '"
 }')
+    $faqJsonld = Jsonld ('{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    ' + ($faqSchema -join ",`n    ") + '
+  ]
+}')
+    $jsonld = $pageJsonld + "`n" + $faqJsonld
 
     $html = Build-Page $content $title $comboDesc $canonical $jsonld
     Write-Page ($t.slug + '/' + $tr.slug + '/index.html') $html

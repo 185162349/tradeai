@@ -297,6 +297,47 @@ ul.cons li::before {
 .filter-count { font-size: 13.5px; color: var(--muted); }
 .filter-empty { font-size: 15px; color: var(--muted); margin: 0 0 28px; }
 
+/* ------------------------------------------------------------- comparison */
+
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 30px; }
+table.compare {
+  width: 100%; border-collapse: separate; border-spacing: 0; margin: 0;
+  min-width: 560px; font-size: 14.5px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow-sm);
+}
+table.compare th, table.compare td {
+  text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top;
+}
+table.compare thead th {
+  background: var(--bg-soft); font-size: 12.5px; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--muted);
+}
+table.compare tbody tr:last-child td { border-bottom: 0; }
+table.compare tbody tr:hover { background: var(--bg-soft); }
+table.compare td:first-child { font-weight: 600; }
+
+/* -------------------------------------------------------------------- faq */
+
+.faq {
+  margin: 0 0 32px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); overflow: hidden; box-shadow: var(--shadow-sm);
+}
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item:last-child { border-bottom: 0; }
+.faq-item summary {
+  cursor: pointer; position: relative; list-style: none;
+  padding: 15px 46px 15px 18px; font-weight: 600; font-size: 16px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+"; position: absolute; right: 18px; top: 12px;
+  font-size: 20px; font-weight: 700; color: var(--accent);
+}
+.faq-item[open] summary::after { content: "\2013"; }
+.faq-item summary:hover { background: var(--bg-soft); }
+.faq-item .faq-a { margin: 0; padding: 0 18px 16px; color: var(--muted); font-size: 15px; }
+
 /* -------------------------------------------------------------------- ads */
 
 .ad-slot { margin: 28px auto; min-height: 0; text-align: center; }

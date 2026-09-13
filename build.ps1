@@ -77,6 +77,60 @@ function Jsonld($objectText) {
   return "<script type=`"application/ld+json`">`n" + $objectText + "`n</script>"
 }
 
+# builds the FAQ block for a listing page: two or three answers derived from the
+# page's own tool data plus one hand-written question from the taxonomy.
+# returns @{ Html = ...; Schema = ... }
+function Build-Faq($subject, $costSubject, $toolsList, $extraFaq) {
+  $topText = @()
+  foreach ($tl in @($toolsList | Select-Object -First 3)) {
+    $bf = ([string]$tl.bestFor) -replace '\.$', ''
+    $topText += $tl.name + ' (' + $bf + ')'
+  }
+  $freeOnes = @(@($toolsList) | Where-Object { $_.free -match 'Free tier' })
+  $freeCount = $freeOnes.Count
+  $freeNames = @()
+  foreach ($f in @($freeOnes | Select-Object -First 4)) { $freeNames += $f.name }
+
+  $faq = New-Object System.Collections.ArrayList
+  [void]$faq.Add(@{
+    q = 'Which ' + $subject + ' are worth trying first?'
+    a = 'The three that stand out here are ' + ($topText -join ', ') +
+        '. Start with the one that matches your size and the work you do most, not the one with the longest feature list.'
+  })
+  [void]$faq.Add(@{
+    q = 'How much does ' + $costSubject + ' cost?'
+    a = 'Across the ' + @($toolsList).Count + ' tools on this page, ' + $freeCount +
+        ' have a free tier and the rest are paid, most of them billed per user per month. Prices move often, so confirm on the vendor site before committing.'
+  })
+  if ($freeCount -gt 0) {
+    [void]$faq.Add(@{
+      q = 'Can I try these tools for free?'
+      a = 'Yes — ' + ($freeNames -join ', ') + ' all have a free tier, so you can run a few real jobs through them before paying anything.'
+    })
+  } else {
+    [void]$faq.Add(@{
+      q = 'Can I try these tools for free?'
+      a = 'Not on a permanent free tier. These tools offer free trials instead, which is enough to put a few real jobs through them before deciding.'
+    })
+  }
+  if ($extraFaq -and $extraFaq.q) {
+    [void]$faq.Add(@{ q = [string]$extraFaq.q; a = [string]$extraFaq.a })
+  }
+
+  $html = @()
+  $schema = @()
+  $first = $true
+  foreach ($f in $faq) {
+    $openAttr = if ($first) { ' open' } else { '' }
+    $html += '<details class="faq-item"' + $openAttr + '><summary>' + (Esc $f.q) + '</summary>' +
+             '<p class="faq-a">' + (Esc $f.a) + '</p></details>'
+    $schema += '{"@type":"Question","name":"' + (JsStr $f.q) +
+               '","acceptedAnswer":{"@type":"Answer","text":"' + (JsStr $f.a) + '"}}'
+    $first = $false
+  }
+  return @{ Html = ($html -join "`n      "); Schema = ($schema -join ",`n    ") }
+}
+
 # builds a BreadcrumbList from an array of @{ name = ...; url = ... }
 # url is relative to the site root, e.g. '/quoting/plumbers/'
 function Breadcrumb-Jsonld($items) {
@@ -219,6 +273,7 @@ Write-Page 'index.html' $html
 
 foreach ($t in $tasks) {
   $list = @()
+  $rows = @()
   foreach ($tool in @($toolsByTask[$t.slug])) {
     $tagParts = @()
     if ($tool.free -match 'Free tier') { $tagParts += '<span class="tag free">Free tier</span>' }
@@ -226,7 +281,18 @@ foreach ($t in $tasks) {
     $list += '<li><h3><a href="/tools/' + $tool.slug + '/">' + (Esc $tool.name) + '</a></h3>' +
              '<p>' + (Esc $tool.tagline) + '</p>' +
              '<div class="tags">' + ($tagParts -join '') + '</div></li>'
+
+    $best = [string]$tool.bestFor
+    if ($best.Length -gt 95) { $best = $best.Substring(0, 92).TrimEnd() + '...' }
+    $rows += '<tr><td><a href="/tools/' + $tool.slug + '/">' + (Esc $tool.name) + '</a></td>' +
+             '<td>' + (Esc $best) + '</td>' +
+             '<td>' + (Esc $tool.pricing) + '</td>' +
+             '<td>' + (Esc $tool.free) + '</td></tr>'
   }
+
+  $compareTable = '<div class="table-scroll"><table class="compare">' +
+    '<thead><tr><th>Tool</th><th>Best for</th><th>Pricing</th><th>Free option</th></tr></thead>' +
+    '<tbody>' + ($rows -join "`n      ") + '</tbody></table></div>'
 
   $otherCards = @()
   foreach ($other in $tasks) {
@@ -235,25 +301,39 @@ foreach ($t in $tasks) {
                    '<span>' + @($toolsByTask[$other.slug]).Count + ' tools</span></a></li>'
   }
 
+  $taskLower = ([string]$t.name).ToLower()
+  $faqData = Build-Faq ($taskLower + ' tools') ($taskLower + ' software') @($toolsByTask[$t.slug]) $t.faq
+
   $content = Apply $tplTask @{
-    'NAME'        = Esc $t.name
-    'H1'          = Esc ($t.name + ' - AI tools for contractors')
-    'DESC'        = Esc $t.desc
-    'PAIN'        = Esc $t.pain
-    'TOOL_LIST'   = ($list -join "`n      ")
-    'OTHER_TASKS' = ($otherCards -join "`n      ")
+    'NAME'          = Esc $t.name
+    'H1'            = Esc ($t.name + ' - AI tools for contractors')
+    'DESC'          = Esc $t.desc
+    'PAIN'          = Esc $t.pain
+    'CONTEXT'       = Esc $t.context
+    'COMPARE_TABLE' = $compareTable
+    'TOOL_LIST'     = ($list -join "`n      ")
+    'FAQ_ITEMS'     = $faqData.Html
+    'OTHER_TASKS'   = ($otherCards -join "`n      ")
   }
 
   $canonical = $cfg.domain + '/' + $t.slug + '/'
   $title = $t.name + ' - AI tools for contractors and trades'
   $desc  = $t.desc
-  $jsonld = Jsonld ('{
+  $pageJsonld = Jsonld ('{
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "' + $title + '",
   "url": "' + $canonical + '",
   "description": "' + $desc + '"
 }')
+  $faqJsonld = Jsonld ('{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    ' + $faqData.Schema + '
+  ]
+}')
+  $jsonld = $pageJsonld + "`n" + $faqJsonld
 
   $bc = Breadcrumb-Jsonld @(
     @{ name = 'Home'; url = '/' },
@@ -375,13 +455,25 @@ $tplTrade = Get-Content (Join-Path $src 'templates\trade.html') -Raw -Encoding U
 
 foreach ($tr in $trades) {
   $list = @()
+  $rows = @()
   foreach ($tl in @($toolsByTrade[$tr.slug])) {
     $tagParts = @()
     if ($tl.free -match 'Free tier') { $tagParts += '<span class="tag free">Free tier</span>' }
     $list += '<li><h3><a href="/tools/' + $tl.slug + '/">' + (Esc $tl.name) + '</a></h3>' +
              '<p>' + (Esc $tl.tagline) + '</p>' +
              '<div class="tags">' + ($tagParts -join '') + '</div></li>'
+
+    $best = [string]$tl.bestFor
+    if ($best.Length -gt 95) { $best = $best.Substring(0, 92).TrimEnd() + '...' }
+    $rows += '<tr><td><a href="/tools/' + $tl.slug + '/">' + (Esc $tl.name) + '</a></td>' +
+             '<td>' + (Esc $best) + '</td>' +
+             '<td>' + (Esc $tl.pricing) + '</td>' +
+             '<td>' + (Esc $tl.free) + '</td></tr>'
   }
+
+  $compareTable = '<div class="table-scroll"><table class="compare">' +
+    '<thead><tr><th>Tool</th><th>Best for</th><th>Pricing</th><th>Free option</th></tr></thead>' +
+    '<tbody>' + ($rows -join "`n      ") + '</tbody></table></div>'
 
   $cards = @()
   foreach ($t in $tasks) {
@@ -391,24 +483,39 @@ foreach ($tr in $trades) {
               '<span>' + $n + ' tools for ' + (Esc $tr.name) + '</span></a></li>'
   }
 
+  $tradeLower = ([string]$tr.name).ToLower()
+  if ($tr.slug -eq 'hvac') { $tradeLower = 'HVAC' }
+  $faqData = Build-Faq ('tools for ' + $tradeLower) ('software for ' + $tradeLower) @($toolsByTrade[$tr.slug]) $tr.faq2
+
   $content = Apply $tplTrade @{
-    'NAME'       = Esc $tr.name
-    'H1'         = Esc ('AI tools for ' + $tr.name)
-    'CONTEXT'    = Esc $tr.context
-    'TASK_CARDS' = ($cards -join "`n      ")
-    'TOOL_LIST'  = ($list -join "`n      ")
+    'NAME'          = Esc $tr.name
+    'H1'            = Esc ('AI tools for ' + $tr.name)
+    'CONTEXT'       = Esc $tr.context
+    'PAIN'          = Esc $tr.pain
+    'COMPARE_TABLE' = $compareTable
+    'TASK_CARDS'    = ($cards -join "`n      ")
+    'TOOL_LIST'     = ($list -join "`n      ")
+    'FAQ_ITEMS'     = $faqData.Html
   }
 
   $canonical = $cfg.domain + '/' + $tr.slug + '/'
   $title = 'AI tools for ' + $tr.name
   $desc  = [string]$tr.context
-  $jsonld = Jsonld ('{
+  $pageJsonld = Jsonld ('{
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "' + $title + '",
   "url": "' + $canonical + '",
   "description": "' + $desc + '"
 }')
+  $faqJsonld = Jsonld ('{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    ' + $faqData.Schema + '
+  ]
+}')
+  $jsonld = $pageJsonld + "`n" + $faqJsonld
 
   $bc = Breadcrumb-Jsonld @(
     @{ name = 'Home'; url = '/' },

@@ -4,43 +4,78 @@
       "slug": "quoting",
       "name": "Quoting & estimating",
       "desc": "Producing estimates and bids faster — measuring, takeoffs, material pricing and proposal writing.",
-      "pain": "Estimating is where trades lose the most unpaid hours, and a slow quote usually means a lost job."
+      "pain": "Estimating is where trades lose the most unpaid hours, and a slow quote usually means a lost job.",
+      "context": "Quoting is where a trade business either wins the job or spends the evening writing a bid nobody accepts. Most contractors still price from experience and a materials list, which works fine until the job is bigger than usual or the customer is comparing three quotes. The tools here range from fast estimate builders you can use on the doorstep to AI that measures drawings and produces a takeoff for you.",
+      "faq": {
+        "q": "How fast should I send a quote?",
+        "a": "Same day is the realistic target for small jobs. On domestic work the first quote back wins far more often than the cheapest one, so a rough but fast number beats an accurate one that arrives two days later."
+      }
     },
     {
       "slug": "scheduling",
       "name": "Scheduling & dispatch",
       "desc": "Booking jobs, routing crews, managing calendars and reducing no-shows.",
-      "pain": "Double bookings and wasted drive time are the two most expensive scheduling mistakes."
+      "pain": "Double bookings and wasted drive time are the two most expensive scheduling mistakes.",
+      "context": "Scheduling is the job that never appears on an invoice. Every hour lost to a badly routed crew or a technician sent to the wrong address is margin gone, and the cost stays invisible because nobody records it. Scheduling software starts paying for itself once you are running more than one crew and can no longer hold the week in your head.",
+      "faq": {
+        "q": "Do I need scheduling software if I only have two vans?",
+        "a": "Probably not yet. The pain usually starts around three or four people, when mistakes begin costing return visits. Below that a shared calendar is enough, and the money is better spent on getting paid faster."
+      }
     },
     {
       "slug": "invoicing",
       "name": "Invoicing & payments",
       "desc": "Turning completed work into invoices, chasing payment and reconciling the books.",
-      "pain": "Getting paid weeks after the work is done is a cash-flow problem, not an admin problem."
+      "pain": "Getting paid weeks after the work is done is a cash-flow problem, not an admin problem.",
+      "context": "Getting paid is a process, not an event. Most late payment in the trades comes from slow invoicing rather than unwilling customers: the work finishes on Friday and the invoice goes out the following week. Taking card payment on site removes most of the problem, and staged billing protects you on larger jobs.",
+      "faq": {
+        "q": "Should I take card payments on site?",
+        "a": "Yes, if your average job is under a few thousand. Getting paid before you leave removes the entire chasing problem, and the processing fee is usually smaller than the cost of one invoice that sits unpaid for a month."
+      }
     },
     {
       "slug": "customer-communication",
       "name": "Customer communication",
       "desc": "Answering enquiries, following up on quotes, sending updates and handling calls you miss.",
-      "pain": "Missed calls are missed jobs — most customers call the next company on the list."
+      "pain": "Missed calls are missed jobs — most customers call the next company on the list.",
+      "context": "Most trade businesses lose work before they know it existed: the phone rings while you are on a job and the caller moves down the list. The tools here cover missed calls, follow-up on quotes you have already sent, and the progress updates customers expect once work starts.",
+      "faq": {
+        "q": "What is the cheapest way to stop missing calls?",
+        "a": "A call answering service or an AI receptionist, which costs far less than one lost job a month. If you work alone and cannot pick up while working, that is usually the highest return piece of software you can buy."
+      }
     },
     {
       "slug": "job-documentation",
       "name": "Job documentation",
       "desc": "Site photos, daily reports, progress tracking and proof of work for clients and compliance.",
-      "pain": "Without photo records, disputes over what was done become your word against theirs."
+      "pain": "Without photo records, disputes over what was done become your word against theirs.",
+      "context": "Photographs end arguments. Before-and-after records, daily progress reports and signed sign-offs are what protect you when a customer disputes what was done, and on electrical and gas work the paperwork is legally required regardless. The tools here make capturing that record automatic rather than something you remember at the end of the day.",
+      "faq": {
+        "q": "How long should I keep job photos?",
+        "a": "For as long as the warranty on your work runs, and longer for anything involving compliance certificates. Storage is cheap; a missing photo during a dispute is expensive."
+      }
     },
     {
       "slug": "marketing",
       "name": "Marketing & reviews",
       "desc": "Getting found locally, collecting reviews, and producing content without a marketing team.",
-      "pain": "Most trade businesses get the majority of new work from local search and word of mouth."
+      "pain": "Most trade businesses get the majority of new work from local search and word of mouth.",
+      "context": "Most trade businesses live on local search and word of mouth, which means reviews and a complete Google Business Profile usually matter more than a website. The tools here handle review requests, local ranking and the kind of content you do not have time to write yourself.",
+      "faq": {
+        "q": "What actually gets a trade business more reviews?",
+        "a": "Asking at the moment the job finishes, with a direct link. Requests sent days later get a fraction of the response rate, and most happy customers simply never think to leave one unprompted."
+      }
     },
     {
       "slug": "bookkeeping",
       "name": "Bookkeeping & admin",
       "desc": "Categorising expenses, capturing receipts and keeping the accounts current.",
-      "pain": "A shoebox of receipts in April costs more in accountant fees than the software would have."
+      "pain": "A shoebox of receipts in April costs more in accountant fees than the software would have.",
+      "context": "Bookkeeping is the admin everyone postpones, and the cost appears once a year as accountant fees. Photographing receipts the day you spend the money and connecting a bank feed is most of the work; the rest is categorising consistently so the numbers mean something at year end.",
+      "faq": {
+        "q": "Can I do my own bookkeeping as a small trade business?",
+        "a": "Yes for day-to-day recording, and most owners do. What is worth paying for is year-end and tax advice. Software handles the recording; a good accountant stops you making expensive structural mistakes."
+      }
     }
   ],
   "trades": [
@@ -48,9 +83,14 @@
       "slug": "plumbers",
       "name": "Plumbers",
       "context": "Plumbing work is mostly reactive — emergency callouts, narrow arrival windows and customers who want a price before you have seen the job. Speed of quoting and answering the phone tends to decide who wins the work.",
+      "pain": "Plumbing work is reactive: the phone rings, the job is urgent, and the customer wants a price before anyone has looked at it. That combination is why speed — of quoting, of answering, of invoicing on the doorstep — decides who gets the work.",
       "faq": {
         "q": "Can I quote a plumbing job from a photo?",
         "a": "Enough to give a range, not a fixed price. Most plumbers use photos to qualify the job and decide whether the visit is chargeable, then confirm the number on site before any work starts."
+      },
+      "faq2": {
+        "q": "What software do plumbers actually need first?",
+        "a": "Something that lets you quote and invoice from your phone. Scheduling and marketing matter later; the first win is turning a callout into an invoice before you leave the property."
       },
       "pains": {
         "quoting": "Plumbing quotes are usually written on the doorstep with the customer waiting. A quote that takes two days to arrive loses to the company that priced it on the spot, so speed matters more than precision.",
@@ -66,9 +106,14 @@
       "slug": "electricians",
       "name": "Electricians",
       "context": "Electrical work carries certification and documentation duties that most other trades do not, so paperwork is genuinely part of the job rather than an optional extra. Records of what was installed and tested matter long after the invoice is paid.",
+      "pain": "Electrical work carries certification duties that most trades do not. Test results, circuit schedules and installation certificates have to be produced, stored, and produced again years later, so documentation is part of the job rather than admin around it.",
       "faq": {
         "q": "Do I need software that stores electrical certificates?",
         "a": "Any system that lets you attach test results and certificates to a job and find them again later is enough. Dedicated certification apps only start to matter when you are issuing a large number of certificates every month."
+      },
+      "faq2": {
+        "q": "Do electricians need trade-specific software or will generic job management do?",
+        "a": "Generic tools handle quoting and invoicing fine. Where trade-specific software earns its keep is certification and test records — if you issue a lot of certificates, that alone justifies the switch."
       },
       "pains": {
         "quoting": "Electrical estimating has to account for circuit counts, cable runs and certification work, which is hard to price from memory. Under-quoting a rewire is one of the most expensive mistakes in the trade.",
@@ -84,9 +129,14 @@
       "slug": "hvac",
       "name": "HVAC",
       "context": "HVAC businesses live and die by seasonality — a heatwave fills the schedule in a day, and maintenance contracts are what smooth the rest of the year. Dispatch efficiency and timely service reminders have a direct effect on revenue.",
+      "pain": "HVAC is seasonal in a way most trades are not. A heatwave or a cold snap fills the diary overnight, and the rest of the year depends on maintenance contracts. Software has to help you survive the peak and stay in front of customers between peaks.",
       "faq": {
         "q": "Should maintenance contracts be billed monthly or annually?",
         "a": "Monthly billing is standard because it smooths seasonality and keeps the customer on the books. Annual billing is simpler to administer but leaves you without contact between visits."
+      },
+      "faq2": {
+        "q": "How do HVAC businesses smooth out seasonality?",
+        "a": "Maintenance agreements. They fill the shoulder seasons and keep you in front of the customer before the next peak, which is why service reminders and contract billing are worth more to HVAC than to most trades."
       },
       "pains": {
         "quoting": "HVAC quotes are often given on site with the customer deciding the same day, especially during a heatwave. Load calculations and equipment options make it easy to under-price the install.",
@@ -102,9 +152,14 @@
       "slug": "roofers",
       "name": "Roofers",
       "context": "Roofing jobs are high value, weather dependent and frequently disputed, which makes photo documentation and written scope unusually important. Much of the work is also sold through inspections and insurance claims, so records carry real weight.",
+      "pain": "Roofing jobs are large, weather dependent and frequently disputed. Scope has to be written down, progress photographed, and invoices are often tied to inspection stages or insurance claims — records carry real financial weight here.",
       "faq": {
         "q": "How do I price weather risk into a roofing quote?",
         "a": "Most roofers price the job normally and manage weather through scheduling, with a clause covering delays. Adding a large contingency to the number usually just loses the job."
+      },
+      "faq2": {
+        "q": "Why is documentation so important for roofers specifically?",
+        "a": "Because the work is high value and mostly hidden once finished. Photos of decking and underlayment are what settle insurance claims and disputes about whether a stage was actually completed."
       },
       "pains": {
         "quoting": "Roofing estimates depend on pitch, access, material choice and weather risk, all of which move the number. A fast estimate that misses access costs turns a good margin into a loss.",
@@ -120,9 +175,14 @@
       "slug": "landscapers",
       "name": "Landscapers",
       "context": "Landscaping runs on repeat visits and route density — the same properties, week after week. Scheduling and routing matter more than almost anything else, and most customers are happy to pay by card on the day.",
+      "pain": "Landscaping is a repeat-visit business, so profit comes from route density rather than from any single job. The same properties week after week, with crews routed sensibly, is what makes the numbers work.",
       "faq": {
         "q": "Is per-visit or monthly billing better for landscaping?",
         "a": "Monthly billing suits recurring maintenance because it matches how customers budget. Per-visit works better for one-off cleanups and seasonal work where the scope changes each time."
+      },
+      "faq2": {
+        "q": "What matters most in landscaping software?",
+        "a": "Routing and recurring billing. If the tool cannot handle repeat visits on a schedule and bill them monthly without you touching it, it is not doing the job that matters."
       },
       "pains": {
         "quoting": "Landscaping quotes are site-specific and seasonal, and customers often compare three of them. Quoting from a standard price list without a site visit produces numbers you cannot defend.",
@@ -138,9 +198,14 @@
       "slug": "remodelers",
       "name": "Remodelers & carpenters",
       "context": "Remodelling jobs run for weeks, involve change orders and tie up cash in materials before the customer pays. Job costing and progress billing are the difference between a profitable project and one that quietly loses money.",
+      "pain": "Remodelling ties up cash in materials and labour for weeks, and scope moves while the job runs. Without job costing and progress billing you can finish a project that looks successful and still have lost money on it.",
       "faq": {
         "q": "How do I stop change orders eating the margin?",
         "a": "Price every change as a separate written order with its own cost and time impact before the work proceeds. Verbal changes agreed on site are where remodelling profit disappears."
+      },
+      "faq2": {
+        "q": "How do remodelers protect margin on long jobs?",
+        "a": "Price every change in writing before the work happens and bill against milestones. Most remodelling losses come from verbal changes and from financing the customer's project out of your own pocket."
       },
       "pains": {
         "quoting": "Remodelling quotes carry change orders, allowances and selections that move after work starts. A quote written without allowances gets renegotiated, usually in the customer's favour.",
@@ -156,9 +221,14 @@
       "slug": "general-contractors",
       "name": "General contractors",
       "context": "General contractors coordinate other trades, which means documentation, scheduling and compliance are constant rather than occasional. On larger projects the paper trail is often contractually required, not merely useful.",
+      "pain": "A GC's job is coordination, which means information rather than tools: subcontractor schedules, RFIs, inspection records and progress claims. When paperwork is missing, payments stop — regardless of how good the work is.",
       "faq": {
         "q": "How many projects can a small GC manage without software?",
         "a": "Two or three concurrent projects are manageable with spreadsheets. Beyond that, subcontractor schedules, RFIs and progress claims start needing a system with one shared record."
+      },
+      "faq2": {
+        "q": "When does a GC outgrow spreadsheets?",
+        "a": "Around three concurrent projects. Below that, spreadsheets work; beyond it, the number of subcontractor schedules, change orders and payment applications exceeds what you can track without a shared system."
       },
       "pains": {
         "quoting": "GC bids are assembled from subcontractor quotes, and the submission window is short. Missed scope in a sub's number becomes your problem, so takeoff accuracy matters more than raw speed.",

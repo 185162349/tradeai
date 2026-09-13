@@ -82,6 +82,7 @@
     {
       "slug": "plumbers",
       "name": "Plumbers",
+      "desc": "AI and software tools for plumbing businesses — quoting, scheduling, invoicing and handling emergency callouts faster.",
       "context": "Plumbing work is mostly reactive — emergency callouts, narrow arrival windows and customers who want a price before you have seen the job. Speed of quoting and answering the phone tends to decide who wins the work.",
       "pain": "Plumbing work is reactive: the phone rings, the job is urgent, and the customer wants a price before anyone has looked at it. That combination is why speed — of quoting, of answering, of invoicing on the doorstep — decides who gets the work.",
       "faq": {
@@ -105,6 +106,7 @@
     {
       "slug": "electricians",
       "name": "Electricians",
+      "desc": "Software and AI tools for electrical contractors — quoting, certification records, scheduling and invoicing in one place.",
       "context": "Electrical work carries certification and documentation duties that most other trades do not, so paperwork is genuinely part of the job rather than an optional extra. Records of what was installed and tested matter long after the invoice is paid.",
       "pain": "Electrical work carries certification duties that most trades do not. Test results, circuit schedules and installation certificates have to be produced, stored, and produced again years later, so documentation is part of the job rather than admin around it.",
       "faq": {
@@ -128,6 +130,7 @@
     {
       "slug": "hvac",
       "name": "HVAC",
+      "desc": "AI tools for HVAC businesses — dispatch, maintenance contracts, service reminders and getting paid between seasonal peaks.",
       "context": "HVAC businesses live and die by seasonality — a heatwave fills the schedule in a day, and maintenance contracts are what smooth the rest of the year. Dispatch efficiency and timely service reminders have a direct effect on revenue.",
       "pain": "HVAC is seasonal in a way most trades are not. A heatwave or a cold snap fills the diary overnight, and the rest of the year depends on maintenance contracts. Software has to help you survive the peak and stay in front of customers between peaks.",
       "faq": {
@@ -151,6 +154,7 @@
     {
       "slug": "roofers",
       "name": "Roofers",
+      "desc": "Tools for roofing contractors — estimating, photo documentation, progress billing and insurance or inspection records.",
       "context": "Roofing jobs are high value, weather dependent and frequently disputed, which makes photo documentation and written scope unusually important. Much of the work is also sold through inspections and insurance claims, so records carry real weight.",
       "pain": "Roofing jobs are large, weather dependent and frequently disputed. Scope has to be written down, progress photographed, and invoices are often tied to inspection stages or insurance claims — records carry real financial weight here.",
       "faq": {
@@ -174,6 +178,7 @@
     {
       "slug": "landscapers",
       "name": "Landscapers",
+      "desc": "Software for landscaping businesses — route scheduling, recurring billing, quotes and keeping repeat customers.",
       "context": "Landscaping runs on repeat visits and route density — the same properties, week after week. Scheduling and routing matter more than almost anything else, and most customers are happy to pay by card on the day.",
       "pain": "Landscaping is a repeat-visit business, so profit comes from route density rather than from any single job. The same properties week after week, with crews routed sensibly, is what makes the numbers work.",
       "faq": {
@@ -197,6 +202,7 @@
     {
       "slug": "remodelers",
       "name": "Remodelers & carpenters",
+      "desc": "AI tools for remodelers and carpenters — job costing, change orders, progress billing and project documentation.",
       "context": "Remodelling jobs run for weeks, involve change orders and tie up cash in materials before the customer pays. Job costing and progress billing are the difference between a profitable project and one that quietly loses money.",
       "pain": "Remodelling ties up cash in materials and labour for weeks, and scope moves while the job runs. Without job costing and progress billing you can finish a project that looks successful and still have lost money on it.",
       "faq": {
@@ -220,6 +226,7 @@
     {
       "slug": "general-contractors",
       "name": "General contractors",
+      "desc": "Tools for general contractors — subcontractor scheduling, daily reports, RFIs, compliance records and progress claims.",
       "context": "General contractors coordinate other trades, which means documentation, scheduling and compliance are constant rather than occasional. On larger projects the paper trail is often contractually required, not merely useful.",
       "pain": "A GC's job is coordination, which means information rather than tools: subcontractor schedules, RFIs, inspection records and progress claims. When paperwork is missing, payments stop — regardless of how good the work is.",
       "faq": {

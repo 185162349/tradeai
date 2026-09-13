@@ -15,13 +15,13 @@
     {
       "slug": "terms",
       "title": "Terms of Use",
-      "description": "Terms and conditions for using this directory.",
+      "description": "Terms and conditions for using this directory: how the information is compiled, what we are not responsible for, and links to third-party sites.",
       "body": "<p>By using this site you agree to these terms.</p><h2>Information is provided as-is</h2><p>Tool descriptions, features and prices are compiled for general information. Vendors change pricing and features frequently. Always verify details on the vendor's own site before making a purchase decision.</p><h2>No professional advice</h2><p>Nothing here constitutes legal, financial or professional advice.</p><h2>Links to third parties</h2><p>We link to external sites for convenience. We do not control them and are not responsible for their content or practices.</p><h2>Changes</h2><p>We may update these terms at any time.</p>"
     },
     {
       "slug": "contact",
       "title": "Contact",
-      "description": "Get in touch about corrections, additions or questions.",
+      "description": "Contact TradeStack about a correction, an out-of-date price, or a tool you think should be listed in this directory for contractors and trades.",
       "body": "<p>We welcome corrections. If a tool description is out of date, a price is wrong, or you would like a tool considered for inclusion, get in touch.</p><h2>Email</h2><p>{{CONTACT_EMAIL}}</p><h2>What is useful to send</h2><ul><li>The tool name and URL</li><li>What job it does for your trade</li><li>Whether you would recommend it and to whom</li></ul><p>We do not accept payment for inclusion or for ranking.</p>"
     }
   ]

@@ -51,5 +51,5 @@
 
 - [About](https://stackfortrades.com/about/): Who we are, how we choose AI tools for contractors and trades, and what we will not do.
 - [Privacy Policy](https://stackfortrades.com/privacy/): How this site handles visitor data, cookies and advertising.
-- [Terms of Use](https://stackfortrades.com/terms/): Terms and conditions for using this directory.
-- [Contact](https://stackfortrades.com/contact/): Get in touch about corrections, additions or questions.
+- [Terms of Use](https://stackfortrades.com/terms/): Terms and conditions for using this directory: how the information is compiled, what we are not responsible for, and links to third-party sites.
+- [Contact](https://stackfortrades.com/contact/): Contact TradeStack about a correction, an out-of-date price, or a tool you think should be listed in this directory for contractors and trades.

@@ -236,13 +236,13 @@ foreach ($tool in $tools) {
       $taskTags++
     }
   }
-  if ($tool.free -match 'Free tier') { $tagParts += '<span class="tag free">Free tier</span>' }
+  if ($tool.free -match 'Free tier') { $tagParts += '<span class="tag free">' + (Esc $tool.free) + '</span>' }
   if ($tool.pricing -notmatch '^\s*Free') {
     $tagParts += '<span class="tag price">' + (Esc $tool.pricing) + '</span>'
   }
+  $tagsHtml = if ($tagParts.Count -gt 0) { '<div class="tags">' + ($tagParts -join '') + '</div>' } else { '' }
   $toolItems += '<li><h3><a href="/tools/' + $tool.slug + '/">' + (Esc $tool.name) + '</a></h3>' +
-                '<p>' + (Esc $tool.tagline) + '</p>' +
-                '<div class="tags">' + ($tagParts -join '') + '</div></li>'
+                '<p>' + (Esc $tool.tagline) + '</p>' + $tagsHtml + '</li>'
 }
 
 $homeContent = Apply $tplHome @{
@@ -276,11 +276,11 @@ foreach ($t in $tasks) {
   $rows = @()
   foreach ($tool in @($toolsByTask[$t.slug])) {
     $tagParts = @()
-    if ($tool.free -match 'Free tier') { $tagParts += '<span class="tag free">Free tier</span>' }
-    $tagParts += '<span class="tag">' + (Esc $tool.pricing) + '</span>'
+    if ($tool.free -match 'Free tier') { $tagParts += '<span class="tag free">' + (Esc $tool.free) + '</span>' }
+    if ($tool.pricing -notmatch '^\s*Free') { $tagParts += '<span class="tag price">' + (Esc $tool.pricing) + '</span>' }
+    $tagsHtml = if ($tagParts.Count -gt 0) { '<div class="tags">' + ($tagParts -join '') + '</div>' } else { '' }
     $list += '<li><h3><a href="/tools/' + $tool.slug + '/">' + (Esc $tool.name) + '</a></h3>' +
-             '<p>' + (Esc $tool.tagline) + '</p>' +
-             '<div class="tags">' + ($tagParts -join '') + '</div></li>'
+             '<p>' + (Esc $tool.tagline) + '</p>' + $tagsHtml + '</li>'
 
     $best = [string]$tool.bestFor
     if ($best.Length -gt 95) { $best = $best.Substring(0, 92).TrimEnd() + '...' }
@@ -412,7 +412,10 @@ foreach ($tool in $tools) {
 
   $canonical = $cfg.domain + '/tools/' + $tool.slug + '/'
   $title = $tool.name + ' - ' + $primaryName + ' for contractors'
-  $desc  = $tool.tagline
+  $desc  = [string]$tool.tagline
+  if ($desc.Length -lt 100) {
+    $desc = $desc.TrimEnd('.') + '. See pricing, pros and cons, and which trades it suits.'
+  }
   $jsonld = Jsonld ('{
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -458,10 +461,11 @@ foreach ($tr in $trades) {
   $rows = @()
   foreach ($tl in @($toolsByTrade[$tr.slug])) {
     $tagParts = @()
-    if ($tl.free -match 'Free tier') { $tagParts += '<span class="tag free">Free tier</span>' }
+    if ($tl.free -match 'Free tier') { $tagParts += '<span class="tag free">' + (Esc $tl.free) + '</span>' }
+    if ($tl.pricing -notmatch '^\s*Free') { $tagParts += '<span class="tag price">' + (Esc $tl.pricing) + '</span>' }
+    $tagsHtml = if ($tagParts.Count -gt 0) { '<div class="tags">' + ($tagParts -join '') + '</div>' } else { '' }
     $list += '<li><h3><a href="/tools/' + $tl.slug + '/">' + (Esc $tl.name) + '</a></h3>' +
-             '<p>' + (Esc $tl.tagline) + '</p>' +
-             '<div class="tags">' + ($tagParts -join '') + '</div></li>'
+             '<p>' + (Esc $tl.tagline) + '</p>' + $tagsHtml + '</li>'
 
     $best = [string]$tl.bestFor
     if ($best.Length -gt 95) { $best = $best.Substring(0, 92).TrimEnd() + '...' }
@@ -478,7 +482,7 @@ foreach ($tr in $trades) {
   $cards = @()
   foreach ($t in $tasks) {
     $n = Count-ForTrade $t.slug $tr.slug
-    if ($n -eq 0) { continue }
+    if ($n -lt 2) { continue }   # combination pages only exist with 2+ tools, otherwise this would be a dead link
     $cards += '<li><a href="/' + $t.slug + '/' + $tr.slug + '/">' + (Esc $t.name) +
               '<span>' + $n + ' tools for ' + (Esc $tr.name) + '</span></a></li>'
   }
@@ -500,7 +504,7 @@ foreach ($tr in $trades) {
 
   $canonical = $cfg.domain + '/' + $tr.slug + '/'
   $title = 'AI tools for ' + $tr.name
-  $desc  = [string]$tr.context
+  $desc  = if ($tr.desc) { [string]$tr.desc } else { [string]$tr.context }
   $pageJsonld = Jsonld ('{
   "@context": "https://schema.org",
   "@type": "CollectionPage",
@@ -550,10 +554,11 @@ foreach ($t in $tasks) {
     $rows = @()
     foreach ($tl in $matched) {
       $tagParts = @()
-      if ($tl.free -match 'Free tier') { $tagParts += '<span class="tag free">Free tier</span>' }
+      if ($tl.free -match 'Free tier') { $tagParts += '<span class="tag free">' + (Esc $tl.free) + '</span>' }
+      if ($tl.pricing -notmatch '^\s*Free') { $tagParts += '<span class="tag price">' + (Esc $tl.pricing) + '</span>' }
+      $tagsHtml = if ($tagParts.Count -gt 0) { '<div class="tags">' + ($tagParts -join '') + '</div>' } else { '' }
       $list += '<li><h3><a href="/tools/' + $tl.slug + '/">' + (Esc $tl.name) + '</a></h3>' +
-               '<p>' + (Esc $tl.tagline) + '</p>' +
-               '<div class="tags">' + ($tagParts -join '') + '</div></li>'
+               '<p>' + (Esc $tl.tagline) + '</p>' + $tagsHtml + '</li>'
 
       $best = [string]$tl.bestFor
       if ($best.Length -gt 95) { $best = $best.Substring(0, 92).TrimEnd() + '...' }
@@ -581,6 +586,7 @@ foreach ($t in $tasks) {
     $taskLower  = ([string]$t.name).ToLower()
 
     $comboDesc = 'Tools that help ' + $tradeLower + ' with ' + $taskLower + '. ' + $t.desc
+    if ($comboDesc.Length -gt 155) { $comboDesc = $comboDesc.Substring(0, 152) + '...' }
 
     # ---- FAQ: two answers built from the page data, the unique pain, plus the trade's own question
     $topText = @()

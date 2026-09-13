@@ -103,11 +103,11 @@
     {
       "slug": "workiz",
       "name": "Workiz",
-      "url": "https://www.getworkiz.com",
+      "url": "https://www.workiz.com",
       "tagline": "Field service software with a strong phone and communication layer.",
       "tasks": ["scheduling", "invoicing", "customer-communication"],
       "trades": ["plumbers", "electricians", "hvac", "landscapers"],
-      "pricing": "Paid, with a free entry option",
+      "pricing": "Paid (tiered)",
       "free": "Free tier",
       "bestFor": "Small teams that live on the phone and want calls tied to jobs.",
       "ai": "AI assistance for call handling, scheduling and follow-ups.",

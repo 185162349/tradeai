@@ -19,6 +19,12 @@
       "body": "<p>By using this site you agree to these terms.</p><h2>Information is provided as-is</h2><p>Tool descriptions, features and prices are compiled for general information. Vendors change pricing and features frequently. Always verify details on the vendor's own site before making a purchase decision.</p><h2>No professional advice</h2><p>Nothing here constitutes legal, financial or professional advice.</p><h2>Links to third parties</h2><p>We link to external sites for convenience. We do not control them and are not responsible for their content or practices.</p><h2>Changes</h2><p>We may update these terms at any time.</p>"
     },
     {
+      "slug": "affiliate-disclosure",
+      "title": "Affiliate Disclosure",
+      "description": "How this site may earn money from links to tool vendors, and why commissions never affect which tools we recommend or how we rate them.",
+      "body": "<p>This page explains how Stack for Trades may earn money, and what that does and does not mean for what you read here.</p><h2>Do you use affiliate links?</h2><p>Some links to tool vendors on this site may be affiliate links, which means we could receive a commission if you sign up or buy through them. Where that applies it costs you nothing extra — the price you pay is the same as going directly to the vendor.</p><h2>Does commission affect what you recommend?</h2><p>No. Tools are listed because they do a real job for a trade business, not because a vendor pays us. We do not rank tools by commission, and we do not accept payment to include a tool or to place it higher.</p><h2>How we choose tools</h2><p>A tool is listed if it does at least one job a trade business genuinely pays for: quoting, scheduling, invoicing, customer communication, site documentation, marketing or bookkeeping. Where a tool has little or no real AI, we say so plainly — that is not negotiable for a commission.</p><h2>Advertising</h2><p>This site may display advertising. Advertising does not influence which tools are listed or how they are described.</p><h2>Questions</h2><p>If you want to know whether a specific link earns us anything, contact us and we will tell you directly.</p>"
+    },
+    {
       "slug": "contact",
       "title": "Contact",
       "description": "Contact TradeStack about a correction, an out-of-date price, or a tool you think should be listed in this directory for contractors and trades.",

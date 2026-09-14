@@ -3,7 +3,9 @@
   "domain": "https://stackfortrades.com",
   "tagline": "AI tools for contractors and trades",
   "description": "A curated directory of AI tools for contractors, plumbers, electricians, HVAC and other trade businesses — organised by the job each tool actually does.",
-  "contactEmail": "hi@example.com",
+  "contactEmail": "hi@stackfortrades.com",
+  "author": "Yi Liu",
+  "authorRole": "Editor",
   "niche": "contractors and trades",
-  "lastUpdated": "2026-09-12"
+  "lastUpdated": "2026-09-14"
 }

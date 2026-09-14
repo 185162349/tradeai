@@ -340,6 +340,11 @@ table.compare td:first-child { font-weight: 600; }
 
 /* -------------------------------------------------------------------- ads */
 
+.page-updated {
+  margin: 0 0 26px; padding-top: 14px; border-top: 1px solid var(--border);
+  font-size: 13px; color: var(--muted);
+}
+
 .ad-slot { margin: 28px auto; min-height: 0; text-align: center; }
 .ad-slot:empty { display: none; }
 

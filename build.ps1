@@ -66,6 +66,8 @@ function Build-Page($contentHtml, $title, $description, $canonical, $jsonld, $br
     'CONTENT'     = $contentHtml
     'SITE_NAME'   = Esc $script:cfg.siteName
     'DOMAIN'      = $script:cfg.domain
+    'AUTHOR'      = Esc $script:cfg.author
+    'UPDATED'     = Esc $script:cfg.lastUpdated
     'YEAR'        = (Get-Date).Year
     'TAGLINE'     = Esc $script:cfg.tagline
     'NAV'         = $script:navHtml
@@ -674,6 +676,8 @@ foreach ($t in $tasks) {
 
 foreach ($p in @($pagesJson.pages)) {
   $body = $p.body -replace '\{\{CONTACT_EMAIL\}\}', $cfg.contactEmail
+  $body = $body -replace '\{\{AUTHOR\}\}', $cfg.author
+  $body = $body -replace '\{\{AUTHOR_ROLE\}\}', $cfg.authorRole
   $content = Apply $tplPage @{ 'H1' = Esc $p.title; 'BODY' = $body }
   $canonical = $cfg.domain + '/' + $p.slug + '/'
   $bc = Breadcrumb-Jsonld @(

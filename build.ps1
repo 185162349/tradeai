@@ -705,6 +705,11 @@ User-agent: *
 Allow: /
 Disallow: /404.html
 
+# The on-site search is client-side only and never writes ?q= into the URL.
+# This line is insurance in case a future change makes it do so — search result
+# pages are exactly the kind of thin, auto-generated URLs Google penalises.
+Disallow: /*?q=
+
 # --- AI / LLM crawlers (explicit allow) ---
 # Training crawlers
 User-agent: GPTBot
@@ -775,6 +780,56 @@ $assetsDest = Join-Path $dist 'assets'
 if (Test-Path $assetsSrc) {
   Copy-Item $assetsSrc $assetsDest -Recurse -Force
 }
+
+# ----------------------------------------------------------------- search index
+# A flat index of every tool / job / trade, consumed by assets/js/search.js.
+# Kept tiny (~46 records) so it ships as one cached file instead of a search backend.
+
+$searchIdx = New-Object System.Collections.ArrayList
+
+foreach ($tool in $tools) {
+  $kw = New-Object System.Collections.ArrayList
+  foreach ($ts in @($tool.tasks))  { if ($taskBySlug.ContainsKey($ts))  { [void]$kw.Add([string]$taskBySlug[$ts].name) } }
+  foreach ($tr in @($tool.trades)) { if ($tradeBySlug.ContainsKey($tr)) { [void]$kw.Add([string]$tradeBySlug[$tr]) } }
+  [void]$kw.Add([string]$tool.pricing)
+  [void]$kw.Add([string]$tool.free)
+  [void]$searchIdx.Add(@{
+    t = 'tool'
+    n = [string]$tool.name
+    u = '/tools/' + $tool.slug + '/'
+    d = [string]$tool.tagline
+    k = (@($kw | Where-Object { $_ }) -join ' ')
+  })
+}
+
+foreach ($t in $tasks) {
+  [void]$searchIdx.Add(@{
+    t = 'job'; n = [string]$t.name; u = '/' + $t.slug + '/'
+    d = [string]$t.desc; k = ''
+  })
+}
+
+foreach ($tr in $trades) {
+  [void]$searchIdx.Add(@{
+    t = 'trade'; n = [string]$tr.name; u = '/' + $tr.slug + '/'
+    d = [string]$tr.desc; k = ''
+  })
+}
+
+$idxJson = New-Object System.Text.StringBuilder
+[void]$idxJson.Append('window.__TS_INDEX__=[')
+$idxFirst = $true
+foreach ($rec in $searchIdx) {
+  if (-not $idxFirst) { [void]$idxJson.Append(',') }
+  $idxFirst = $false
+  [void]$idxJson.Append('{t:"' + $rec.t + '"' +
+    ',n:"' + (JsStr $rec.n) + '"' +
+    ',u:"' + (JsStr $rec.u) + '"' +
+    ',d:"' + (JsStr $rec.d) + '"' +
+    ',k:"' + (JsStr $rec.k) + '"}')
+}
+[void]$idxJson.Append('];')
+Write-Page 'assets/js/search-index.js' $idxJson.ToString()
 
 # ----------------------------------------------------------------- static extras
 

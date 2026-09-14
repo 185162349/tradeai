@@ -47,6 +47,18 @@
   <div class="wrap">
     <h1>AI tools for contractors and trades</h1>
     <p class="lead">A curated directory of AI tools for contractors, plumbers, electricians, HVAC and other trade businesses — organised by the job each tool actually does.</p>
+    <form class="hero-search" id="site-search" role="search" autocomplete="off">
+      <div class="search-field">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="M20 20l-3.6-3.6"></path>
+        </svg>
+        <input type="search" placeholder="Search 32 tools — try &ldquo;takeoff&rdquo;, &ldquo;invoicing&rdquo; or &ldquo;plumbers&rdquo;"
+               aria-label="Search tools, jobs and trades"
+               role="combobox" aria-expanded="false" aria-controls="site-search-results" aria-autocomplete="list">
+        <div class="search-results" id="site-search-results" role="listbox" hidden></div>
+      </div>
+    </form>
     <p class="hero-meta">
       <span><b>32</b> tools reviewed</span>
       <span><b>7</b> jobs covered</span>
@@ -153,6 +165,8 @@
     </nav>
   </div>
 </footer>
+<script src="/assets/js/search-index.js" defer></script>
+<script src="/assets/js/search.js" defer></script>
 <script src="/assets/js/filter.js" defer></script>
 <script src="/assets/js/ads.js" defer></script>
 </body>

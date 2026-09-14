@@ -2,6 +2,11 @@ User-agent: *
 Allow: /
 Disallow: /404.html
 
+# The on-site search is client-side only and never writes ?q= into the URL.
+# This line is insurance in case a future change makes it do so 鈥?search result
+# pages are exactly the kind of thin, auto-generated URLs Google penalises.
+Disallow: /*?q=
+
 # --- AI / LLM crawlers (explicit allow) ---
 # Training crawlers
 User-agent: GPTBot

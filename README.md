@@ -101,6 +101,17 @@ tradeai/
 └── dist/                  generated site (deploy this)
 ```
 
+## On-site search
+
+The home page has an instant search box. `build.ps1` generates `dist/assets/js/search-index.js`
+(~10 KB, one cached file) from the same JSON, and `src/assets/js/search.js` does the matching in
+the browser: name prefix → name substring → keywords (jobs, trades, pricing) → description.
+Results are grouped into Tools / Jobs / Trades and are keyboard navigable.
+
+It is deliberately **not** a crawlable search: the query never reaches the URL, so no thin
+`/search/?q=…` pages can be indexed. `robots.txt` blocks `/*?q=` as insurance. Nothing needs to
+change when you add tools — the index is rebuilt from `tools.json` / `taxonomy.json`.
+
 ## Notes on content quality
 
 - Google penalises programmatic pages that are near-duplicates ("doorway pages"). Two guards are

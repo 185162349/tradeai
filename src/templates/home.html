@@ -2,6 +2,18 @@
   <div class="wrap">
     <h1>{{H1}}</h1>
     <p class="lead">{{LEAD}}</p>
+    <form class="hero-search" id="site-search" role="search" autocomplete="off">
+      <div class="search-field">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="M20 20l-3.6-3.6"></path>
+        </svg>
+        <input type="search" placeholder="Search {{TOOL_COUNT}} tools — try &ldquo;takeoff&rdquo;, &ldquo;invoicing&rdquo; or &ldquo;plumbers&rdquo;"
+               aria-label="Search tools, jobs and trades"
+               role="combobox" aria-expanded="false" aria-controls="site-search-results" aria-autocomplete="list">
+        <div class="search-results" id="site-search-results" role="listbox" hidden></div>
+      </div>
+    </form>
     <p class="hero-meta">
       <span><b>{{TOOL_COUNT}}</b> tools reviewed</span>
       <span><b>{{TASK_COUNT}}</b> jobs covered</span>

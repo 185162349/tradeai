@@ -156,7 +156,44 @@
     show();
   }
 
-  input.addEventListener('input', function () { render(input.value); });
+  // ---------------------------------------------------------------- analytics
+  // Reports to whichever privacy-friendly analytics script is present on the page.
+  // Nothing is sent unless you install one (see README "Search analytics"), so this
+  // is inert by default and never blocks the UI.
+  function track(name, data) {
+    try {
+      if (window.umami && typeof window.umami.track === 'function') { window.umami.track(name, data); return; }
+      if (typeof window.plausible === 'function') { window.plausible(name, { props: data }); return; }
+      if (window.dataLayer && typeof window.dataLayer.push === 'function') {
+        var payload = { event: name };
+        for (var k in data) { if (data.hasOwnProperty(k)) payload[k] = data[k]; }
+        window.dataLayer.push(payload);
+      }
+    } catch (e) { /* analytics must never break search */ }
+  }
+
+  // One event per settled query, not per keystroke. Queries are free text, so they
+  // are trimmed and truncated before leaving the page.
+  var reportTimer = null;
+  function scheduleReport(raw) {
+    if (reportTimer) clearTimeout(reportTimer);
+    var q = String(raw || '').trim();
+    if (q.length < 3) return;
+    reportTimer = setTimeout(function () {
+      track('search', { query: q.slice(0, 40), hits: query(q).length });
+    }, 1200);
+  }
+
+  input.addEventListener('input', function () {
+    render(input.value);
+    scheduleReport(input.value);
+  });
+
+  // mousedown, not click: the browser may navigate away before click fires
+  panel.addEventListener('mousedown', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('.search-item') : null;
+    if (a) track('search-click', { query: input.value.trim().slice(0, 40), target: a.getAttribute('href') });
+  });
 
   input.addEventListener('focus', function () {
     if (input.value.trim()) render(input.value);

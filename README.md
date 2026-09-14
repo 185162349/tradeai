@@ -112,6 +112,27 @@ It is deliberately **not** a crawlable search: the query never reaches the URL, 
 `/search/?q=…` pages can be indexed. `robots.txt` blocks `/*?q=` as insurance. Nothing needs to
 change when you add tools — the index is rebuilt from `tools.json` / `taxonomy.json`.
 
+### Search analytics
+
+`search.js` emits two events, 1.2 s after typing stops and only for queries of 3+ characters:
+
+| Event | Properties | Meaning |
+|---|---|---|
+| `search` | `query`, `hits` | What people look for. `hits: 0` is the useful one — demand you have no page for. |
+| `search-click` | `query`, `target` | Which result actually won the click. |
+
+It reports to Umami, Plausible or a `dataLayer` (GA4) — whichever exists on `window`. Nothing is
+sent if none is installed, so the shipping build stays script-free. To switch it on, add one
+script tag to `templates/layout.html` where the comment marks it:
+
+```html
+<script defer src="https://cloud.umami.is/script.js" data-website-id="YOUR-ID"></script>
+```
+
+**Note:** Cloudflare Web Analytics (the free, cookieless one) does **not** support custom events —
+it only measures pageviews, referrers and countries. Search terms cannot land there, so you need
+a second, still-cookieless script (Umami or Plausible) if you want to see them.
+
 ## Notes on content quality
 
 - Google penalises programmatic pages that are near-duplicates ("doorway pages"). Two guards are

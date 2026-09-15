@@ -773,6 +773,31 @@ foreach ($p in @($pagesJson.pages)) {
 }
 Write-Page 'llms.txt' $llms.ToString()
 
+# ----------------------------------------------------------------- indexnow
+# IndexNow asks participating engines to crawl a URL as soon as it changes.
+# The key file must be served from the same host as the submitted URLs.
+#
+# The key is generated once and stored in src/indexnow.json rather than rebuilt
+# each time: if it changed between deploys every engine would reject it, and a
+# CDN-cached copy of the old file makes that failure very hard to spot. If you
+# ever do need to rotate it, purge the Cloudflare cache afterwards.
+
+$indexnowPath = Join-Path $src 'indexnow.json'
+$indexnowKey = $null
+if (Test-Path $indexnowPath) {
+  try { $indexnowKey = (Read-JsonFile $indexnowPath).key } catch { $indexnowKey = $null }
+}
+if (-not $indexnowKey) {
+  # Guid 'N' format = 32 hex chars, which satisfies the 8-128 / [a-zA-Z0-9-] rule
+  $indexnowKey = [System.Guid]::NewGuid().ToString('N')
+  $noBom = New-Object System.Text.UTF8Encoding($false)
+  [System.IO.File]::WriteAllText($indexnowPath, (ConvertTo-Json @{ key = $indexnowKey }) + "`n", $noBom)
+  Write-Host ('IndexNow: generated a new key in ' + $indexnowPath) -ForegroundColor Yellow
+}
+# the file must contain nothing but the key, with no BOM and no trailing newline
+$noBomEnc = New-Object System.Text.UTF8Encoding($false)
+[System.IO.File]::WriteAllText((Join-Path $dist ($indexnowKey + '.txt')), [string]$indexnowKey, $noBomEnc)
+
 # ----------------------------------------------------------------- assets
 
 $assetsSrc  = Join-Path $src 'assets'
@@ -845,3 +870,4 @@ $notFound = Build-Page $notFoundContent 'Page not found' 'The page you were look
 Write-Page '404.html' $notFound
 
 Write-Host ('Done. Pages: ' + $urls.Count + '  ->  ' + $dist) -ForegroundColor Green
+Write-Host ('IndexNow key file: /' + $indexnowKey + '.txt  (deploy it, then run ping-indexnow.ps1)') -ForegroundColor DarkGray
